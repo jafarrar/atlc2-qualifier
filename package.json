@@ -1,0 +1,58 @@
+{
+  "name": "atlc2-qualifier",
+  "version": "0.0.0",
+  "description": "\"The on-stream graphics used during the Amaz Team League Championship qualifier.\"",
+  "homepage": "http://atlc2.org",
+  "author": {
+    "name": "Andrew Farrar",
+    "email": "kegwen@gmail.com",
+    "url": "http://kegwen.com"
+  },
+  "files": [
+    "dashboard",
+    "graphics",
+    "extension.js",
+    "extension"
+  ],
+  "keywords": [
+    "nodecg",
+    "hearthstone",
+    "react",
+    "nodecg-bundle"
+  ],
+  "nodecg": {
+    "compatibleRange": "~0.8.0",
+    "dashboardPanels": [
+      {
+        "name": "players",
+        "title": "Players Editor",
+        "width": 4,
+        "file": "players.html",
+        "headerColor": "#9f9bbd"
+      }
+    ],
+    "graphics": [
+      {
+        "file": "caster-cams-overview",
+        "width": 1920,
+        "height": 1080
+      }
+    ],
+    "assetCategories": [
+      {
+        "name": "player-pictures",
+        "title": "Player Pictures",
+        "allowTypes": [
+          "jpg",
+          "jpeg",
+          "gif",
+          "png"
+        ]
+      }
+    ]
+  },
+  "repository": "https://github.com/nodecg/nodecg.git",
+  "license": "MIT",
+  "dependencies": {
+  }
+}
