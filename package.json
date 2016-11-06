@@ -54,5 +54,6 @@
   "repository": "https://github.com/nodecg/nodecg.git",
   "license": "MIT",
   "dependencies": {
+    "webpack": "^1.13.3"
   }
 }
