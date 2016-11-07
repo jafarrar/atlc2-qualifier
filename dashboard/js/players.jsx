@@ -1,60 +1,7 @@
-const hsClasses = [
-	{
-		id: 0,
-		"value": "Hero"
-	},
-	{
-		id: 1,
-		"value": "Druid"
-	},
-	{
-		id: 2,
-		"value": "Hunter"
-	},
-	{
-		id: 3,
-		"value": "Mage"
-	},
-	{
-		id: 4,
-		"value": "Paladin"
-	},
-	{
-		id: 5,
-		"value": "Priest"
-	},
-	{
-		id: 6,
-		"value": "Rogue"
-	},
-	{
-		id: 7,
-		"value": "Shaman"
-	},
-	{
-		id: 8,
-		"value": "Warlock"
-	},
-	{
-		id: 9,
-		"value": "Warrior"
-	},
-];
+const hsClasses = [{id:0,"value":"Hero"},{id:1,"value":"Druid"},{id:2,"value":"Hunter"},{id:3,"value":"Mage"},{id:4,"value":"Paladin"},{id:5,"value":"Priest"},{id:6,"value":"Rogue"},{id:7,"value":"Shaman"},{id:8,"value":"Warlock"},{id:9,"value":"Warrior"}];
 
 const playersRep = nodecg.Replicant('players');
 const picturesRep = nodecg.Replicant('assets:player-pictures');
-
-//source: https://blog.iansinnott.com/managing-state-and-controlled-form-fields-with-react/
-function makeValueLink(key) {
-	return {
-		value: this.state[key],
-		requestChange: function(newValue) {
-			newState = {};
-			newState[key] = newValue;
-			this.setState(newState);
-		}
-	}
-}
 
 const PlayersPanel = React.createClass({
     loadPlayersFromServer: function() {
@@ -85,7 +32,6 @@ const PlayersPanel = React.createClass({
     render: function() {
         return (
             <div className="playersPanel">
-                <h1>Players</h1>
 				<PlayerList 
 					players={this.state.players} 
 				/>
@@ -99,8 +45,15 @@ const PlayersPanel = React.createClass({
 const PlayerList = React.createClass({
 	getInitialState() {
 		return {
-			activePlayer: {},
-			playerPictureList: []
+			playerPictureList: [],
+			activePlayer: {
+				tag: 'Placeholder',
+				id: -1,
+				picture: '',
+				wins: 0,
+				losses: 0,
+				decks: []
+			}
 		};
 	},
 
@@ -116,14 +69,6 @@ const PlayerList = React.createClass({
 		}.bind(this));
 	},
 
-	addPlayer: function() {
-		console.log('This will eventually add a new player');
-	},
-
-	removePlayer: function(playerId) {
-		console.log('This will eventually remove a player');
-	},
-
 	componentDidMount: function() {
 		this.loadPlayerPicturesFromServer();
 
@@ -133,7 +78,14 @@ const PlayerList = React.createClass({
 	},
 
 	handleActiveChange: function(e) {
-		this.setState({activePlayer: this.props.players[e.target.value]});
+		const playerObj = this.props.players.filter(function(playerObj) {
+			return playerObj.id == e.target.value;
+		});
+
+		this.setState({
+			activePlayer: playerObj[0],
+			activePlayerId: playerObj[0].id
+		});
 	},
 
 	render: function() {
@@ -151,7 +103,7 @@ const PlayerList = React.createClass({
 						<label>Edit a Player</label>
 						<select 
 							className="playerSelect" 
-							value={this.state.activePlayer} 
+							value={this.state.activePlayerId} 
 							onChange={this.handleActiveChange}>
 								<option key='-1'>Select a player</option>
 								{this.props.players.map(MakeItem)}
@@ -162,17 +114,78 @@ const PlayerList = React.createClass({
 					player={this.state.activePlayer} 
 					playerPictureList={this.state.playerPictureList}
 				/>
+				<AddPlayerForm />
 			</div>
+		);
+	}
+});
+
+const AddPlayerForm = React.createClass({
+	getInitialState() {
+		return {
+			newPlayerTag: ''
+		};
+	},
+
+	handleTagChange: function(e) {
+		this.setState({newPlayerTag: e.target.value});
+	},
+
+
+	handleSubmit: function(e) {
+		e.preventDefault();
+
+		if(this.state.newPlayerTag == '') {
+			console.log('Empty tag');
+			return;
+		}
+
+		// very ugly psuedorandom id generator
+		let newPlayer = {
+			tag: this.state.newPlayerTag.trim(),
+			id: Math.floor(Date.now() * Math.random()),
+			picture: '',
+			wins: 0,
+			losses: 0,
+			decks: ['', '', '', '', '']
+		};
+
+		if(!playersRep.value) {
+			playersRep.value = [newPlayer]
+		} else {
+			playersRep.value.push(newPlayer);
+		}
+
+		this.setState({newPlayerTag: ''});
+	},
+
+	render: function() {
+		return (
+			<form className="addPlayer" onSubmit={this.handleSubmit}>
+				<label>New Player's Tag</label>
+				<input
+					type="text"
+					id="new-player-tag"
+					value={this.state.newPlayerTag}
+					onChange={this.handleTagChange}
+				/>
+				<input
+					type="submit"
+					value="Add Player"
+				/>
+			</form>
 		);
 	}
 });
 
 //Generates the form for editing an individual player
 //Handles the state of an individual player
+//TO FIX: Currently, the form updates the db but not the field until you refresh or change active player
 const PlayerEditor = React.createClass({
 	getInitialState() {
 		return {
 			tag: '',
+			id: -1,
 			picture: '',
 			wins: 0,
 			losses: 0,
@@ -183,19 +196,60 @@ const PlayerEditor = React.createClass({
 	componentWillReceiveProps: function(nextProps) {
 		this.setState({
 			tag: nextProps.player.tag,
+			id: nextProps.player.id,
 			picture: nextProps.player.picture,
 			wins: nextProps.player.wins,
 			losses: nextProps.player.losses,
 			decks: nextProps.player.decks
 		});
 	},
-
-	updatePlayer: function(playerId) {
-		console.log('This will eventually update a player');
+	
+	findPlayer: function(player) {
+		return player.id === this.state.id;
 	},
 
-	handleChange: function(e) {
-		console.log('handle change for picture', e.target);
+	updatePlayer: function(e) {
+		e.preventDefault();
+
+		const updatedPlayer = {
+			tag: this.state.tag,
+			id: this.state.id,
+			picture: this.state.picture,
+			wins: this.state.wins,
+			losses: this.state.losses,
+			decks: this.state.decks			
+		};
+
+		const index = playersRep.value.findIndex(this.findPlayer);
+
+		playersRep.value[index] = updatedPlayer;
+	},
+
+	removePlayer: function(e) {
+		e.preventDefault();
+
+		if(confirm('Delete this player?' + this.state.tag)) {
+			this.setState({
+				tag: ''
+			});
+			const index = playersRep.value.findIndex(this.findPlayer);
+			playersRep.value.splice(index, 1);
+		}
+	},
+
+	handleChange: function(field, e) {
+		let nextState = {};
+		nextState[field] = e.target.value;
+		this.setState(nextState);
+	},
+
+	handleDeckChange: function(deckNum, e) {
+		let nextState = {};
+		let decks = this.state.decks;
+
+		decks[deckNum] = e.target.value;
+		nextState.decks = decks;
+		this.setState(nextState);	
 	},
 
 	render: function() {
@@ -213,19 +267,71 @@ const PlayerEditor = React.createClass({
 
 		}.bind(this));
 
+		const MakeItem = function(x) {
+			return <option key={x.id} value={x.value}>{x.value}</option>
+		};
+
 		return (
 			<form className='playerEditor' onSubmit={this.updatePlayer}>
-				<h3>Player tag: {this.state.tag}</h3>
+				<label>Tag</label>
 				<input 
 					type='text'
 					id='player-tag'
-					value={this.tag}
-					onChange={this.handleChange}
+					value={this.state.tag}
+					onChange={this.handleChange.bind(this, 'tag')}
 				/>
-				<select value={this.state.picture} onChange={this.handleChange}>
+				<label>Picture</label>
+				<select value={this.state.picture} onChange={this.handleChange.bind(this, 'picture')}>
 					<option value=''>Select a picture</option>
 					{pictureNodes}
 				</select>
+				<label>Wins</label>
+				<input 
+					type='number'
+					id='player-wins'
+					value={this.state.wins}
+					onChange={this.handleChange.bind(this, 'wins')}
+				/>
+				<label>Losses</label>
+				<input 
+					type='number'
+					id='player-losses'
+					value={this.state.losses}
+					onChange={this.handleChange.bind(this, 'losses')}
+				/>
+				<label>Classes</label>
+				<div className="deckPicker">
+					<div className="input-group">
+						<label>Deck 1</label>
+						<select className="classSelect" value={this.state.decks[0]} onChange={this.handleDeckChange.bind(this, 0)}>{hsClasses.map(MakeItem)}</select>
+					</div>
+					<div className="input-group">
+						<label>Deck 2</label>
+						<select className="classSelect" value={this.state.decks[1]} onChange={this.handleDeckChange.bind(this, 1)}>{hsClasses.map(MakeItem)}</select>
+					</div>
+					<div className="input-group">
+						<label>Deck 3</label>
+						<select className="classSelect" value={this.state.decks[2]} onChange={this.handleDeckChange.bind(this, 2)}>{hsClasses.map(MakeItem)}</select>
+					</div>
+					<div className="input-group">
+						<label>Deck 4</label>
+						<select className="classSelect" value={this.state.decks[3]} onChange={this.handleDeckChange.bind(this, 3)}>{hsClasses.map(MakeItem)}</select>
+					</div>
+					<div className="input-group">
+						<label>Deck 5</label>
+						<select className="classSelect" value={this.state.decks[4]} onChange={this.handleDeckChange.bind(this, 4)}>{hsClasses.map(MakeItem)}</select>
+					</div>
+				</div>
+				<input
+					type='submit'
+					value='Update'
+					onClick={this.updatePlayer}
+				/>
+				<input
+					type='submit'
+					value='Delete'
+					onClick={this.removePlayer}
+				/>
 
 			</form>
 

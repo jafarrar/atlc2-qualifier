@@ -29,6 +29,13 @@
         "width": 4,
         "file": "players.html",
         "headerColor": "#9f9bbd"
+      },
+      {
+        "name": "series",
+        "title": "Series Editor",
+        "width": 4,
+        "file": "series.html",
+        "headerColor": "#9f9bbd"
       }
     ],
     "graphics": [
