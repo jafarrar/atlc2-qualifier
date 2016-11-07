@@ -17,7 +17,6 @@ const SeriesPanel = React.createClass({
             if(!value) {
                 return {};
             }
-            console.log('series replicant value', value);
             this.setState(value);
 
         }.bind(this));

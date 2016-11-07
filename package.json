@@ -36,6 +36,13 @@
         "width": 4,
         "file": "series.html",
         "headerColor": "#9f9bbd"
+      },
+      {
+        "name": "broadcast",
+        "title": "Broadcast Editor",
+        "width": 4,
+        "file": "broadcast.html",
+        "headerColor": "#9f9bbd"
       }
     ],
     "graphics": [
@@ -49,6 +56,16 @@
       {
         "name": "player-pictures",
         "title": "Player Pictures",
+        "allowTypes": [
+          "jpg",
+          "jpeg",
+          "gif",
+          "png"
+        ]
+      },
+      {
+        "name": "caster-pictures",
+        "title": "Caster Pictures",
         "allowTypes": [
           "jpg",
           "jpeg",
