@@ -35,6 +35,7 @@ const SeriesPanel = React.createClass({
             },
             player1Id: -1,
             player1Status: [],
+            player1Classes: {},
             player2: {
                 tag: 'Placeholder',
                 id: -1,
@@ -44,6 +45,7 @@ const SeriesPanel = React.createClass({
                 decks: [0,0,0,0,0]
             },
             player2Id: -1,
+            player2Classes: {},
             score: '0-0',
             player2Status: []
         }
@@ -93,9 +95,53 @@ const SeriesPanel = React.createClass({
 		this.setState(nextState);
 	},
 
+    buildDeckStatus: function(decks, status) {
+        let combined = [];
+        
+        let deckStatus = {
+            'bans': [],
+            'picks': []
+        }
+
+        decks.forEach(function(deckName, index, array) {
+            combined.push({deckName, 'status': '0'});
+        });
+
+        status.forEach(function(statusObject,index, array) {
+            combined[index].status = statusObject;
+        });
+
+        combined.forEach(function(i) {
+            if(i.status === '1' || i.status === '2') {
+                deckStatus.bans.push(i.deckName);
+            } else if(i.status === '3') {
+                deckStatus.picks.push(i.deckName + '-win');
+            } else {
+                deckStatus.picks.push(i.deckName);
+            }
+                
+        });
+
+        console.log(deckStatus);
+
+        return deckStatus;
+    },
+
+    resetDeckStatus: function(e) {
+        e.preventDefault();
+
+		if(confirm('Reset Picks and Bans for BOTH Players?')) {
+			this.setState({
+                player1Status: ['0','0','0','0','0'],
+                player2Status: ['0','0','0','0','0']
+			});
+		}
+    },
+
     updateSeries: function(e) {
         e.preventDefault();
-        console.log(this.state);
+        this.state.player1Classes = this.buildDeckStatus(this.state.player1.decks, this.state.player1Status);
+        this.state.player2Classes = this.buildDeckStatus(this.state.player2.decks, this.state.player2Status);
         seriesRep.value = this.state;
     },
 
@@ -106,40 +152,55 @@ const SeriesPanel = React.createClass({
 
         return (
             <div className="seriesPanel">
-                <label>Player 1</label>
-                <select className="player1Select" 
-                    value={this.state.player1Id} 
-                    onChange={this.updatePlayer1}>
-                        <option key='-1'>Select a player</option>
-                        {this.state.players.map(MakeItem)}
-                </select>
-                <label>Player 2</label>
-                <select className="player2Select" 
-                    value={this.state.player2Id} 
-                    onChange={this.updatePlayer2}>
-                        <option key='-1'>Select a player</option>
-                        {this.state.players.map(MakeItem)}
-                </select>
-                <label>Score</label>
-                <input
-                    type='text'
-                    id='score'
-                    value={this.state.score}
-                    onChange={this.handleChange.bind(this, 'score')}
-                />
-                <input
-                    type='submit'
-                    value='Update Players & Score'
-                    onClick={this.updateSeries}
-                />
+                <p>Players and Score</p>
+                <div className="input-group">
+                    <label>Player 1</label>
+                    <select className="player1Select" 
+                        value={this.state.player1Id} 
+                        onChange={this.updatePlayer1}>
+                            <option key='-1'>Select a player</option>
+                            {this.state.players.map(MakeItem)}
+                    </select>
+                </div>
+                <div className="input-group">
+                    <label>Player 2</label>
+                    <select className="player2Select" 
+                        value={this.state.player2Id} 
+                        onChange={this.updatePlayer2}>
+                            <option key='-1'>Select a player</option>
+                            {this.state.players.map(MakeItem)}
+                    </select>
+                </div>
+                <div className="input-group">
+                    <label>Score</label>
+                    <input
+                        type='text'
+                        id='score'
+                        value={this.state.score}
+                        onChange={this.handleChange.bind(this, 'score')}
+                    />
+                </div>
+                <hr />
+                <p>Player 1 Deck Status</p>
                 <DeckStatus
                     player={this.state.player1}
                     status={this.state.player1Status}
                 />
+                <hr />
+                <p>Player 2 Deck Status</p>
                 <DeckStatus
                     player={this.state.player2}
                     status={this.state.player2Status}
                 />
+                <input
+                    type='submit'
+                    value='Update Series'
+                    onClick={this.updateSeries}
+                />
+                <button
+                    name='button'
+                    onClick={this.resetDeckStatus}
+                >Reset Picks &amp; Bans</button>
             </div>
         );
     }

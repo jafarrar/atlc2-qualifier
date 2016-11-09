@@ -35,13 +35,13 @@ const BroadcastPanel = React.createClass({
     render: function() {
         return (
             <form className='brodcastForm' onSubmit={this.updateBroadcast}>
-                <h1>Broadcast Panel</h1>
                 <CasterForm 
                     caster={this.state.caster1}
                 />
                 <CasterForm 
                     caster={this.state.caster2}
                 />
+                <hr />
                 <LowerThirdForm 
                     lowerthird={this.state.lowerthird}
                 />
@@ -49,7 +49,9 @@ const BroadcastPanel = React.createClass({
 					type='submit'
 					value='Update'
 				/>
+                <hr />
                 <TimerForm />
+                <hr />
                 <FlyoutForm />
             </form>
         );
@@ -65,18 +67,22 @@ const CasterForm = React.createClass({
     render: function() {
         return (
             <div className='casters'>
-                <label>Name</label>
-				<input
-					type="text"
-					value={this.props.caster.name || ''}
-					onChange={this.handleChange.bind(this, 'name')}
-				/>
-                <label>Twitter</label>
-				<input
-					type="text"
-					value={this.props.caster.twitter || ''}
-					onChange={this.handleChange.bind(this, 'twitter')}
-				/>
+                <div className='input-group'>
+                    <label>Name</label>
+                    <input
+                        type="text"
+                        value={this.props.caster.name || ''}
+                        onChange={this.handleChange.bind(this, 'name')}
+                    />
+                </div>
+                <div className='input-group'>
+                    <label>Twitter</label>
+                    <input
+                        type="text"
+                        value={this.props.caster.twitter || ''}
+                        onChange={this.handleChange.bind(this, 'twitter')}
+                    />
+                </div>
             </div>
         );
     }
@@ -91,18 +97,22 @@ const LowerThirdForm = React.createClass({
     render: function() {
         return (
             <div className='lowerthird'>
-                <label>Top</label>
-				<input
-					type="text"
-					value={this.props.lowerthird.top || ''}
-					onChange={this.handleChange.bind(this, 'top')}
-				/>
-                <label>Bottom</label>
-				<input
-					type="text"
-					value={this.props.lowerthird.bottom || ''}
-					onChange={this.handleChange.bind(this, 'bottom')}
-				/>
+                <div className='input-group'>
+                    <label>Top</label>
+                    <input
+                        type="text"
+                        value={this.props.lowerthird.top || ''}
+                        onChange={this.handleChange.bind(this, 'top')}
+                    />
+                </div>
+                <div className='input-group'>
+                    <label>Bottom</label>
+                    <input
+                        type="text"
+                        value={this.props.lowerthird.bottom || ''}
+                        onChange={this.handleChange.bind(this, 'bottom')}
+                    />
+                </div>
             </div>
         );
     }
@@ -169,18 +179,22 @@ const FlyoutForm = React.createClass({
     render: function() {
         return (
             <div className="flyoutForm">
-                <label>Message</label>
-				<input
-					type="text"
-                    value={this.state.message}
-                    onChange={this.handleChange.bind(this, 'message')}
-				/>
-                <label>Twitter Handle</label>
-				<input
-					type="text"
-                    value={this.state.twitterHandle}
-                    onChange={this.handleChange.bind(this, 'twitterHandle')}
-				/>
+                <div className='input-group'>
+                    <label>Message</label>
+                    <input
+                        type="text"
+                        value={this.state.message}
+                        onChange={this.handleChange.bind(this, 'message')}
+                    />
+                </div>
+                <div className='input-group'>
+                    <label>Twitter Handle</label>
+                    <input
+                        type="text"
+                        value={this.state.twitterHandle}
+                        onChange={this.handleChange.bind(this, 'twitterHandle')}
+                    />
+                </div>
                 <button onClick={this.handleStartFlyout}>Start Flyout</button>
                 <button onClick={this.handleHideFlyout}>Hide Flyout</button>
             </div>

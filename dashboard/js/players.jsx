@@ -131,7 +131,6 @@ const AddPlayerForm = React.createClass({
 		this.setState({newPlayerTag: e.target.value});
 	},
 
-
 	handleSubmit: function(e) {
 		e.preventDefault();
 

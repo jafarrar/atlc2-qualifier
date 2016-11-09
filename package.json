@@ -47,7 +47,22 @@
     ],
     "graphics": [
       {
-        "file": "caster-cams-overview",
+        "file": "up-next.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "caster-cams-overview.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "caster-cams-midseries.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "in-game.html",
         "width": 1920,
         "height": 1080
       }
