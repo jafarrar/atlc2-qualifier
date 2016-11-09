@@ -319,7 +319,7 @@ const PlayerBox = React.createClass({
     render: function() {
         return (
             <div className="playerBox">
-                <div className="playerPicture">{this.state.player.picture || ''}</div>
+                <img className="playerPicture" src={"/assets/atlc2-qualifier/player-pictures/" + this.state.player.picture + ".jpg"}/>
                 <div className="playerTag">{this.state.player.tag || ''}</div>
             </div>
         );

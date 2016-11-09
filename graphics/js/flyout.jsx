@@ -3,30 +3,33 @@ const FlyoutDisplay = React.createClass({
         return {
             message: '',
             twitterHandle: '',
-            isTwitter: false
+            isTwitter: false,
+            isActive: false
         }
     },
 
     startTwitterFlyout: function(signal) {
-        console.log(signal);
         this.setState({
             isTwitter: true,
             message: signal.message,
-            twitterHandle: signal.twitterHandle
+            twitterHandle: signal.twitterHandle,
+            isActive: true
         })
     },
 
     startUpdateFlyout: function(signal) {
-        console.log(signal);
         this.setState({
             isTwitter: false,
             message: signal.message,
-            twitterHandle: signal.twitterHandle
+            twitterHandle: 'Match Update:',
+            isActive: true
         })
     },
 
     hideFlyout: function(signal) {
-        console.log(message);
+        this.setState({
+            isActive: false
+        })
     },
 
 	componentDidMount: function() {
@@ -37,13 +40,14 @@ const FlyoutDisplay = React.createClass({
 
     render: function() {
         const isTwitter = this.state.isTwitter;
-        console.log(this.state);
+        const isActive = this.state.isActive;
 
         return (
-            <div className='flyout'>
-                <div className='icon' id={isTwitter ? 'twitter' : 'message'}></div>
-                <div className={isTwitter ? 'label twitter' : 'label'}>{this.state.twitterHandle}</div>
-                <div className='message'>{this.state.message}</div>
+            <div className={isTwitter ? 'flyout twitter' : 'flyout update'} id={isActive ? 'active' : null}>
+                <div className='flyoutContent'>
+                    <div className='label'>{this.state.twitterHandle} </div>
+                    <div className='message'> {this.state.message}</div>
+                </div>
             </div>
         );
 

@@ -1,0 +1,17 @@
+#up-next {
+    background: url('../img/upNextBottom.png');
+    width: 1920px;
+    height: 1080px;
+}
+
+.message {
+    position: absolute;
+    bottom: 30px;
+    left: 35px;
+    font-size: 24px;
+    letter-spacing: 2px;
+}
+
+.message strong {
+    font-family: 'nexa_boldregular', arial;
+}

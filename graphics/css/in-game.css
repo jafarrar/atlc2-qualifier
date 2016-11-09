@@ -1,0 +1,257 @@
+.flyout {
+    width: 1920px;
+    height: 1080px;
+    position: fixed;
+    background: transparent;
+    right: -640px;
+    transition: all .5s linear;
+}
+
+.flyout#active {
+    right: 0;
+}
+
+.flyout.update {
+    background: url('../img/ingameUpdateFlyout.png') no-repeat;
+}
+
+.flyout.twitter {
+    background: url('../img/ingameTwitterFlyout.png') no-repeat;
+}
+
+.flyout .label {
+    font-family: 'nexa_boldregular', arial;
+    margin-right: 10px;
+    margin-top: 15px;
+}
+
+.flyoutContent {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 16px;
+    width: 540px;
+    letter-spacing: 2px;   
+}
+
+.deckBox {
+    position: absolute;
+}
+
+.tag {
+    position: absolute;
+    width: 240px;
+    height: 50px;
+    text-align: center;
+    font-family: 'nexa_boldregular', arial;
+    letter-spacing: 2px;
+    font-size: 28px;
+    margin-top: 10px;
+}
+
+.leftPanel .tag {
+    left: 15px;
+    top: 442px;
+}
+
+.rightPanel .tag {
+    right: 15px;
+    top: 583px;
+}
+
+.leftPanel .deckBox {
+    left: 54px;
+    bottom: 361px;
+}
+
+.rightPanel .deckBox {
+    right: 54px;
+    top: 353px;
+}
+
+.deckBox .picks div {
+    width: 210px;
+    height: 64px;
+    margin-top: 8px;
+}
+
+.deckBox .picks .Druid {
+    background: url('../img/ingame_Druid.png') no-repeat;
+}
+
+.deckBox .picks .Hunter {
+    background: url('../img/ingame_Hunter.png') no-repeat;
+}
+
+.deckBox .picks .Mage {
+    background: url('../img/ingame_Mage.png') no-repeat;
+}
+
+.deckBox .picks .Paladin {
+    background: url('../img/ingame_Paladin.png') no-repeat;
+}
+
+.deckBox .picks .Priest {
+    background: url('../img/ingame_Priest.png') no-repeat;
+}
+
+.deckBox .picks .Rogue {
+    background: url('../img/ingame_Rogue.png') no-repeat;
+}
+
+.deckBox .picks .Shaman {
+    background: url('../img/ingame_Shaman.png') no-repeat;
+}
+
+.deckBox .picks .Warlock {
+    background: url('../img/ingame_Warlock.png') no-repeat;
+}
+
+.deckBox .picks .Warrior {
+    background: url('../img/ingame_Warrior.png') no-repeat;
+}
+
+
+.leftPanel .deckBox .picks .Druid {
+    background: url('../img/ingame_Druid.png') no-repeat;
+}
+
+.leftPanel .deckBox .picks .Hunter {
+    background: url('../img/ingame_Hunter.png') no-repeat;
+}
+
+.leftPanel .deckBox .picks .Mage {
+    background: url('../img/ingame_Mage.png') no-repeat;
+}
+
+.leftPanel .deckBox .picks .Paladin {
+    background: url('../img/ingame_Paladin.png') no-repeat;
+}
+
+.leftPanel .deckBox .picks .Priest {
+    background: url('../img/ingame_Priest.png') no-repeat;
+}
+
+.leftPanel .deckBox .picks .Rogue {
+    background: url('../img/ingame_Rogue.png') no-repeat;
+}
+
+.leftPanel .deckBox .picks .Shaman {
+    background: url('../img/ingame_Shaman.png') no-repeat;
+}
+
+.leftPanel .deckBox .picks .Warlock {
+    background: url('../img/ingame_Warlock.png') no-repeat;
+}
+
+.leftPanel .deckBox .picks .Warrior {
+    background: url('../img/ingame_Warrior.png') no-repeat;
+}
+
+.leftPanel .deckBox .picks .Druid.win {
+    background: url('../img/ingameWinClass.png') no-repeat 96%, url('../img/ingame_Druid.png') no-repeat;
+}
+
+.leftPanel .deckBox .picks .Hunter.win {
+    background: url('../img/ingameWinClass.png') no-repeat 96%, url('../img/ingame_Hunter.png') no-repeat;
+}
+
+.leftPanel .deckBox .picks .Mage.win {
+    background: url('../img/ingameWinClass.png') no-repeat 96%, url('../img/ingame_Mage.png') no-repeat;
+}
+
+.leftPanel .deckBox .picks .Paladin.win {
+    background: url('../img/ingameWinClass.png') no-repeat 96%, url('../img/ingame_Paladin.png') no-repeat;
+}
+
+.leftPanel .deckBox .picks .Priest.win {
+    background: url('../img/ingameWinClass.png') no-repeat 96%, url('../img/ingame_Priest.png') no-repeat;
+}
+
+.leftPanel .deckBox .picks .Rogue.win {
+    background: url('../img/ingameWinClass.png') no-repeat 96%, url('../img/ingame_Rogue.png') no-repeat;
+}
+
+.leftPanel .deckBox .picks .Shaman.win {
+    background: url('../img/ingameWinClass.png') no-repeat 96%, url('../img/ingame_Shaman.png') no-repeat;
+}
+
+.leftPanel .deckBox .picks .Warlock.win {
+    background: url('../img/ingameWinClass.png') no-repeat 96%, url('../img/ingame_Warlock.png') no-repeat;
+}
+
+.leftPanel .deckBox .picks .Warrior.win {
+    background: url('../img/ingameWinClass.png') no-repeat 96%, url('../img/ingame_Warrior.png') no-repeat;
+}
+
+.rightPanel .deckBox .picks .Druid {
+    background: url('../img/ingame_Druid.png') 100% no-repeat;
+}
+
+.rightPanel .deckBox .picks .Hunter {
+    background: url('../img/ingame_Hunter.png') 100% no-repeat;
+}
+
+.rightPanel .deckBox .picks .Mage {
+    background: url('../img/ingame_Mage.png') 100% no-repeat;
+}
+
+.rightPanel .deckBox .picks .Paladin {
+    background: url('../img/ingame_Paladin.png') 100% no-repeat;
+}
+
+.rightPanel .deckBox .picks .Priest {
+    background: url('../img/ingame_Priest.png') 100% no-repeat;
+}
+
+.rightPanel .deckBox .picks .Rogue {
+    background: url('../img/ingame_Rogue.png') 100% no-repeat;
+}
+
+.rightPanel .deckBox .picks .Shaman {
+    background: url('../img/ingame_Shaman.png') 100% no-repeat;
+}
+
+.rightPanel .deckBox .picks .Warlock {
+    background: url('../img/ingame_Warlock.png') 100% no-repeat;
+}
+
+.rightPanel .deckBox .picks .Warrior {
+    background: url('../img/ingame_Warrior.png') 100% no-repeat;
+}
+
+.rightPanel .deckBox .picks .Druid.win {
+    background: url('../img/ingameWinClass.png') no-repeat 1%, url('../img/ingame_Druid.png') 100% no-repeat;
+}
+
+.rightPanel .deckBox .picks .Hunter.win {
+    background: url('../img/ingameWinClass.png') no-repeat 1%, url('../img/ingame_Hunter.png') 100% no-repeat;
+}
+
+.rightPanel .deckBox .picks .Mage.win {
+    background: url('../img/ingameWinClass.png') no-repeat 1%, url('../img/ingame_Mage.png') 100% no-repeat;
+}
+
+.rightPanel .deckBox .picks .Paladin.win {
+    background: url('../img/ingameWinClass.png') no-repeat 1%, url('../img/ingame_Paladin.png') 100% no-repeat;
+}
+
+.rightPanel .deckBox .picks .Priest.win {
+    background: url('../img/ingameWinClass.png') no-repeat 1%, url('../img/ingame_Priest.png') 100% no-repeat;
+}
+
+.rightPanel .deckBox .picks .Rogue.win {
+    background: url('../img/ingameWinClass.png') no-repeat 1%, url('../img/ingame_Rogue.png') 100% no-repeat;
+}
+
+.rightPanel .deckBox .picks .Shaman.win {
+    background: url('../img/ingameWinClass.png') no-repeat 1%, url('../img/ingame_Shaman.png') 100% no-repeat;
+}
+
+.rightPanel .deckBox .picks .Warlock.win {
+    background: url('../img/ingameWinClass.png') no-repeat 1%, url('../img/ingame_Warlock.png') 100% no-repeat;
+}
+
+.rightPanel .deckBox .picks .Warrior.win {
+    background: url('../img/ingameWinClass.png') no-repeat 1%, url('../img/ingame_Warrior.png') 100% no-repeat;
+}

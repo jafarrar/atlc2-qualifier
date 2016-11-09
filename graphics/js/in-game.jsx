@@ -47,6 +47,7 @@ const InGame = React.createClass({
                     player={this.state.series.player2}
                     classes={this.state.series.player2Classes}
                 />
+                <InGameFlyout />
             </div>
         );
     }
@@ -70,7 +71,6 @@ const LeftPanel = React.createClass({
     render: function(){
         return (
             <div className="leftPanel">
-                <p>left</p>
                 <div className="tag">{this.state.tag}</div>
                 <div className="webcam"></div>
                 <div className="series-info"></div>
@@ -100,7 +100,6 @@ const RightPanel = React.createClass({
     render: function(){
         return (
             <div className="rightPanel">
-                <p>right</p>
                 <div className="tag">{this.state.tag}</div>
                 <div className="webcam"></div>
                 <DeckBox
@@ -132,18 +131,70 @@ const DeckBox = React.createClass({
 
         return (
             <div className="deckBox">
-                <p>picks bans</p>
-                <div className="bans">
-                    <div className={this.state.deckStatus.bans[0] || 'Warrior'}>{this.state.deckStatus.bans[0]}</div>
-                    <div className={this.state.deckStatus.bans[1] || 'Warrior'}>{this.state.deckStatus.bans[1]}</div>
-                </div>
                 <div className="picks">
-                    <div className={this.state.deckStatus.picks[0] || 'Warrior'}>{this.state.deckStatus.picks[0]}</div>
-                    <div className={this.state.deckStatus.picks[1] || 'Warrior'}>{this.state.deckStatus.picks[1]}</div>
-                    <div className={this.state.deckStatus.picks[2] || 'Warrior'}>{this.state.deckStatus.picks[2]}</div>
+                    <div className={this.state.deckStatus.picks[0] || 'Warrior'}></div>
+                    <div className={this.state.deckStatus.picks[1] || 'Warrior'}></div>
+                    <div className={this.state.deckStatus.picks[2] || 'Warrior'}></div>
                 </div>
             </div>
         );
+    }
+});
+
+const InGameFlyout = React.createClass({
+    getInitialState() {
+        return {
+            message: '',
+            twitterHandle: '',
+            isTwitter: false,
+            isActive: false
+        }
+    },
+
+    startTwitterFlyout: function(signal) {
+        this.setState({
+            isTwitter: true,
+            message: signal.message,
+            twitterHandle: signal.twitterHandle,
+            isActive: true
+        })
+    },
+
+    startUpdateFlyout: function(signal) {
+        console.log('hi');
+        this.setState({
+            isTwitter: false,
+            message: signal.message,
+            twitterHandle: 'Match Update:',
+            isActive: true
+        })
+    },
+
+    hideFlyout: function(signal) {
+        this.setState({
+            isActive: false
+        })
+    },
+
+	componentDidMount: function() {
+		nodecg.listenFor('startTwitterFlyout', this.startTwitterFlyout);
+        nodecg.listenFor('startUpdateFlyout', this.startUpdateFlyout);
+		nodecg.listenFor('hideFlyout', this.hideFlyout);
+	},
+
+    render: function() {
+        const isTwitter = this.state.isTwitter;
+        const isActive = this.state.isActive;
+
+        return (
+            <div className={isTwitter ? 'flyout twitter' : 'flyout update'} id={isActive ? 'active' : null}>
+                <div className='flyoutContent'>
+                    <div className='label'>{this.state.twitterHandle} </div>
+                    <div className='message'> {this.state.message}</div>
+                </div>
+            </div>
+        );
+
     }
 });
 
