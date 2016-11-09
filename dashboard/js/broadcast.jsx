@@ -160,12 +160,17 @@ const FlyoutForm = React.createClass({
         }
 	},
 
-    handleStartFlyout: function() {
+    handleStartTwitterFlyout: function(e) {
         e.preventDefault();
-        nodecg.sendMessage('startFlyout', this.state);
+        nodecg.sendMessage('startTwitterFlyout', this.state);
     },
 
-    handleHideFlyout: function() {
+    handleStartUpdateFlyout: function(e) {
+        e.preventDefault();
+        nodecg.sendMessage('startUpdateFlyout', this.state);
+    },
+
+    handleHideFlyout: function(e) {
         e.preventDefault();
         nodecg.sendMessage('hideFlyout');
     },
@@ -195,7 +200,8 @@ const FlyoutForm = React.createClass({
                         onChange={this.handleChange.bind(this, 'twitterHandle')}
                     />
                 </div>
-                <button onClick={this.handleStartFlyout}>Start Flyout</button>
+                <button onClick={this.handleStartTwitterFlyout}>Start Twitter Flyout</button>
+                <button onClick={this.handleStartUpdateFlyout}>Start Update Flyout</button>
                 <button onClick={this.handleHideFlyout}>Hide Flyout</button>
             </div>
         );

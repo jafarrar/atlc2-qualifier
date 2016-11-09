@@ -1,0 +1,248 @@
+.standingsBox {
+    position: absolute;
+    width: 325px;
+    height: 430px;
+    border: 2px solid red;
+    top: 475px;
+}
+
+.left .standingsBox:first-child {
+    left: 228px;
+}
+
+.left .standingsBox:last-child {
+    left: 607px;
+}
+
+.right .standingsBox:first-child {
+    right: 607px;
+}
+
+.right .standingsBox:last-child {
+    right: 228px;
+}
+
+.standingsPlayer {
+    height: 52px;
+    width: 100%;
+    border: 1px solid blue;
+    font-size: 24px;
+    position: relative;
+}
+
+.standingsPlayer .score {
+    text-align: right;
+}
+
+.standingsPlayer .tag {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    letter-spacing: 2px;
+}
+
+.standingsPlayer .score {
+    position: absolute;
+    right: 10px;
+    top: 10px
+}
+
+.casterLabel {
+    position: absolute;
+    top: 350px;
+    width: 465px;
+    height: 50px;
+    
+}
+
+.casterLabel:first-child {
+    left: 220px;
+}
+
+.casterLabel:last-child {
+    right: 218px;
+}
+
+.casterLabel .name {
+    font-size:24px;
+    letter-spacing: 2px;
+    position: absolute;
+    top: 13px;
+}
+
+.casterLabel:first-child .name {
+    left: 10px;
+}
+
+.casterLabel:last-child .name {
+    right: 10px;
+}
+
+.playerBox {
+    font-family: 'nexa_boldregular', arial;
+    font-size: 36px;
+    position: absolute;
+    top: 525px;
+    text-align: center;
+    width: 425px;
+    height: 50px;
+}
+
+.playerBox:first-child {
+    left: 315px;
+}
+
+.playerBox:last-child {
+    right: 315px;
+}
+
+.deckbox {
+    position: absolute;
+    bottom: 50px;
+}
+
+.deckBox .bans div {
+    width: 101px;
+    height: 190px;
+    display: inline-block;
+}
+
+.deckBox .bans {
+    position: absolute; 
+    bottom: 165px;
+}
+
+.deckBox:first-child .bans {
+    left: 30px;
+}
+
+.deckBox:last-child .bans {
+    right: 30px;
+}
+
+.deckBox .picks {
+    position: absolute; 
+    bottom: 80px;
+}
+
+.deckBox .picks div {
+    width: 185px;
+    height: 344px;
+    display: inline-block;
+}
+
+.deckBox:first-child .picks {
+    left: 230px;
+}
+
+.deckBox:last-child .picks {
+    right: 230px;
+}
+
+.deckBox .bans .Druid {
+    background: url('../img/ban_Druid.png');
+}
+
+.deckBox .bans .Hunter {
+    background: url('../img/ban_Hunter.png');
+}
+
+.deckBox .bans .Mage {
+    background: url('../img/ban_Mage.png');
+}
+
+.deckBox .bans .Paladin {
+    background: url('../img/ban_Paladin.png');
+}
+
+.deckBox .bans .Priest {
+    background: url('../img/ban_Priest.png');
+}
+
+.deckBox .bans .Rogue {
+    background: url('../img/ban_Rogue.png');
+}
+
+.deckBox .bans .Shaman {
+    background: url('../img/ban_Shaman.png');
+}
+
+.deckBox .bans .Warlock {
+    background: url('../img/ban_Warlock.png');
+}
+
+.deckBox .bans .Warrior {
+    background: url('../img/ban_Warrior.png');
+}
+
+.deckBox .picks .Druid {
+    background: url('../img/class_Druid.png');
+}
+
+.deckBox .picks .Hunter {
+    background: url('../img/class_Hunter.png');
+}
+
+.deckBox .picks .Mage {
+    background: url('../img/class_Mage.png');
+}
+
+.deckBox .picks .Paladin {
+    background: url('../img/class_Paladin.png');
+}
+
+.deckBox .picks .Priest {
+    background: url('../img/class_Priest.png');
+}
+
+.deckBox .picks .Rogue {
+    background: url('../img/class_Rogue.png');
+}
+
+.deckBox .picks .Shaman {
+    background: url('../img/class_Shaman.png');
+}
+
+.deckBox .picks .Warlock {
+    background: url('../img/class_Warlock.png');
+}
+
+.deckBox .picks .Warrior {
+    background: url('../img/class_Warrior.png');
+}
+
+.deckBox .picks .Druid.win {
+    background: url('../img/winClass.png') no-repeat 50% 68%, url('../img/class_Druid.png');
+}
+
+.deckBox .picks .Hunter.win {
+    background: url('../img/winClass.png') no-repeat 50% 68%, url('../img/class_Hunter.png');
+}
+
+.deckBox .picks .Mage.win {
+    background: url('../img/winClass.png') no-repeat 50% 68%, url('../img/class_Mage.png');
+}
+
+.deckBox .picks .Paladin.win {
+    background: url('../img/winClass.png') no-repeat 50% 68%, url('../img/class_Paladin.png');
+}
+
+.deckBox .picks .Priest.win {
+    background: url('../img/winClass.png') no-repeat 50% 68%, url('../img/class_Priest.png');
+}
+
+.deckBox .picks .Rogue.win {
+    background: url('../img/winClass.png') no-repeat 50% 68%, url('../img/class_Rogue.png');
+}
+
+.deckBox .picks .Shaman.win {
+    background: url('../img/winClass.png') no-repeat 50% 68%, url('../img/class_Shaman.png');
+}
+
+.deckBox .picks .Warlock.win {
+    background: url('../img/winClass.png') no-repeat 50% 68%, url('../img/class_Warlock.png');
+}
+
+.deckBox .picks .Warrior.win {
+    background: url('../img/winClass.png') no-repeat 50% 68%, url('../img/class_Warrior.png');
+}

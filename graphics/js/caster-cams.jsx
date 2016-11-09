@@ -6,7 +6,10 @@ const picturesRep = nodecg.Replicant('assets:player-pictures');
 const CasterCams = React.createClass({ 
     getInitialState() {
         return {
-            broadcast: {},
+            broadcast: {
+                caster1: {},
+                caster2: {}
+            },
             players: [],
             series: {
                 player1: {},
@@ -94,18 +97,30 @@ const CasterCams = React.createClass({
     render: function() {
         return (
             <div className="casterCams">
-                <PlayerBox 
-                    player={this.state.series.player1}
-                />
-                <PlayerBox 
-                    player={this.state.series.player2}
-                />
-                <DeckBox
-                    classes={this.state.series.player1Classes}
-                />
-                <DeckBox
-                    classes={this.state.series.player2Classes}
-                />
+                <div className="casterLabelContainer">
+                    <CasterLabel 
+                        caster={this.state.broadcast.caster1}
+                    />
+                    <CasterLabel 
+                        caster={this.state.broadcast.caster2}
+                    />
+                </div>
+                <div className="playerBoxContainer">
+                    <PlayerBox 
+                        player={this.state.series.player1}
+                    />
+                    <PlayerBox 
+                        player={this.state.series.player2}
+                    />
+                </div>
+                <div className="deckBoxContainer">
+                    <DeckBox
+                        classes={this.state.series.player1Classes}
+                    />
+                    <DeckBox
+                        classes={this.state.series.player2Classes}
+                    />
+                </div>
                 <AllStandingsBoxes
                     players={this.state.players}
                 />
@@ -121,7 +136,11 @@ const StandingsBox = React.createClass({
             player1: {},
             player2: {},
             player3: {},
-            player4: {}
+            player4: {},
+            player5: {},
+            player6: {},
+            player7: {},
+            player8: {}
         }
     },
 
@@ -130,7 +149,11 @@ const StandingsBox = React.createClass({
             player1: nextProps.player1,
             player2: nextProps.player2,
             player3: nextProps.player3,
-            player4: nextProps.player4
+            player4: nextProps.player4,
+            player5: nextProps.player5,
+            player6: nextProps.player6,
+            player7: nextProps.player7,
+            player8: nextProps.player8,           
         });
     },
 
@@ -152,6 +175,22 @@ const StandingsBox = React.createClass({
                 <div className="standingsPlayer">
                     <div className="tag">{this.state.player4.tag}</div>
                     <div className="score">{this.state.player4.wins} - {this.state.player4.losses}</div>
+                </div>
+                <div className="standingsPlayer">
+                    <div className="tag">{this.state.player5.tag}</div>
+                    <div className="score">{this.state.player5.wins} - {this.state.player5.losses}</div>
+                </div>
+                <div className="standingsPlayer">
+                    <div className="tag">{this.state.player6.tag}</div>
+                    <div className="score">{this.state.player6.wins} - {this.state.player6.losses}</div>
+                </div>
+                <div className="standingsPlayer">
+                    <div className="tag">{this.state.player7.tag}</div>
+                    <div className="score">{this.state.player7.wins} - {this.state.player7.losses}</div>
+                </div>
+                <div className="standingsPlayer">
+                    <div className="tag">{this.state.player8.tag}</div>
+                    <div className="score">{this.state.player8.wins} - {this.state.player8.losses}</div>
                 </div>
             </div>
         );
@@ -181,24 +220,20 @@ const AllStandingsBoxes = React.createClass({
                         player2={this.state.players[1]}
                         player3={this.state.players[2]}
                         player4={this.state.players[3]}
-                    />
-                    <StandingsBox 
-                        player1={this.state.players[4]}
-                        player2={this.state.players[5]}
-                        player3={this.state.players[6]}
-                        player4={this.state.players[7]}
+                        player5={this.state.players[4]}
+                        player6={this.state.players[5]}
+                        player7={this.state.players[6]}
+                        player8={this.state.players[7]}
                     />
                     <StandingsBox 
                         player1={this.state.players[8]}
                         player2={this.state.players[9]}
                         player3={this.state.players[10]}
                         player4={this.state.players[11]}
-                    />
-                    <StandingsBox 
-                        player1={this.state.players[12]}
-                        player2={this.state.players[13]}
-                        player3={this.state.players[14]}
-                        player4={this.state.players[15]}
+                        player5={this.state.players[12]}
+                        player6={this.state.players[13]}
+                        player7={this.state.players[14]}
+                        player8={this.state.players[15]}
                     />
                 </div>
                 <div className="right">
@@ -207,24 +242,20 @@ const AllStandingsBoxes = React.createClass({
                         player2={this.state.players[17]}
                         player3={this.state.players[18]}
                         player4={this.state.players[19]}
-                    />
-                    <StandingsBox 
-                        player1={this.state.players[20]}
-                        player2={this.state.players[21]}
-                        player3={this.state.players[22]}
-                        player4={this.state.players[23]}
+                        player5={this.state.players[20]}
+                        player6={this.state.players[21]}
+                        player7={this.state.players[22]}
+                        player8={this.state.players[23]}
                     />
                     <StandingsBox 
                         player1={this.state.players[24]}
                         player2={this.state.players[25]}
                         player3={this.state.players[26]}
                         player4={this.state.players[27]}
-                    />
-                    <StandingsBox 
-                        player1={this.state.players[28]}
-                        player2={this.state.players[29]}
-                        player3={this.state.players[30]}
-                        player4={this.state.players[31]}
+                        player5={this.state.players[28]}
+                        player6={this.state.players[29]}
+                        player7={this.state.players[30]}
+                        player8={this.state.players[31]}
                     />
                 </div>
             </div>
@@ -238,8 +269,7 @@ const CasterLabel = React.createClass({
     getInitialState() {
         return {
             caster: {
-                name: '',
-                twitter: ''
+                name: ''
             }
         }
     },
@@ -247,17 +277,21 @@ const CasterLabel = React.createClass({
     componentWillReceiveProps: function(nextProps) {
         this.setState({
             caster: {
-                name: nextProps.caster.name,
-                twitter: nextProps.caster.twitter
+                name: nextProps.caster.name
             }
         });
     },
     
     render: function() {
+        const splitName = this.state.caster.name.split(' ');
+
         return (
             <div className="casterLabel">
-                <div className="name">{caster.name}</div>
-                <div className="twitter">{caster.twitter}</div>
+                <div className="name">
+                    {splitName[0]}
+                    <strong> {splitName[1]} </strong>
+                    {splitName[2]}
+                </div>
             </div>
         );
     }
@@ -313,15 +347,14 @@ const DeckBox = React.createClass({
 
         return (
             <div className="deckBox">
-                <p>picks bans</p>
                 <div className="bans">
-                    <div className={this.state.deckStatus.bans[0] || 'Warrior'}>{this.state.deckStatus.bans[0]}</div>
-                    <div className={this.state.deckStatus.bans[1] || 'Warrior'}>{this.state.deckStatus.bans[1]}</div>
+                    <div className={this.state.deckStatus.bans[0] || 'Warrior'}></div>
+                    <div className={this.state.deckStatus.bans[1] || 'Warrior'}></div>
                 </div>
                 <div className="picks">
-                    <div className={this.state.deckStatus.picks[0] || 'Warrior'}>{this.state.deckStatus.picks[0]}</div>
-                    <div className={this.state.deckStatus.picks[1] || 'Warrior'}>{this.state.deckStatus.picks[1]}</div>
-                    <div className={this.state.deckStatus.picks[2] || 'Warrior'}>{this.state.deckStatus.picks[2]}</div>
+                    <div className={this.state.deckStatus.picks[0] || 'Warrior'}></div>
+                    <div className={this.state.deckStatus.picks[1] || 'Warrior'}></div>
+                    <div className={this.state.deckStatus.picks[2] || 'Warrior'}></div>
                 </div>
             </div>
         );

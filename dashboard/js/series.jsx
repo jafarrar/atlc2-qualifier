@@ -115,7 +115,7 @@ const SeriesPanel = React.createClass({
             if(i.status === '1' || i.status === '2') {
                 deckStatus.bans.push(i.deckName);
             } else if(i.status === '3') {
-                deckStatus.picks.push(i.deckName + '-win');
+                deckStatus.picks.push(i.deckName + ' win');
             } else {
                 deckStatus.picks.push(i.deckName);
             }
