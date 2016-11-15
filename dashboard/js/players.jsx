@@ -110,10 +110,12 @@ const PlayerList = React.createClass({
 						</select>
 					</div>
 				</form>
+				<hr />
 				<PlayerEditor 
 					player={this.state.activePlayer} 
 					playerPictureList={this.state.playerPictureList}
 				/>
+				<hr />
 				<AddPlayerForm />
 			</div>
 		);
@@ -272,33 +274,41 @@ const PlayerEditor = React.createClass({
 
 		return (
 			<form className='playerEditor' onSubmit={this.updatePlayer}>
-				<label>Tag</label>
-				<input 
-					type='text'
-					id='player-tag'
-					value={this.state.tag}
-					onChange={this.handleChange.bind(this, 'tag')}
-				/>
-				<label>Picture</label>
-				<select value={this.state.picture} onChange={this.handleChange.bind(this, 'picture')}>
-					<option value=''>Select a picture</option>
-					{pictureNodes}
-				</select>
-				<label>Wins</label>
-				<input 
-					type='number'
-					id='player-wins'
-					value={this.state.wins}
-					onChange={this.handleChange.bind(this, 'wins')}
-				/>
+				<div className="input-group">
+					<label>Tag</label>
+					<input 
+						type='text'
+						id='player-tag'
+						value={this.state.tag}
+						onChange={this.handleChange.bind(this, 'tag')}
+					/>
+				</div>
+				<div className="input-group">
+					<label>Picture</label>
+					<select value={this.state.picture} onChange={this.handleChange.bind(this, 'picture')}>
+						<option value=''>Select a picture</option>
+						{pictureNodes}
+					</select>
+				</div>
+				<div className="input-group">
+					<label>Wins</label>
+					<input 
+						type='number'
+						id='player-wins'
+						value={this.state.wins}
+						onChange={this.handleChange.bind(this, 'wins')}
+					/>
+				</div>
+				<div className="input-group">
 				<label>Losses</label>
-				<input 
-					type='number'
-					id='player-losses'
-					value={this.state.losses}
-					onChange={this.handleChange.bind(this, 'losses')}
-				/>
-				<label>Classes</label>
+					<input 
+						type='number'
+						id='player-losses'
+						value={this.state.losses}
+						onChange={this.handleChange.bind(this, 'losses')}
+					/>
+				</div>
+				<p><strong>Classes</strong></p>
 				<div className="deckPicker">
 					<div className="input-group">
 						<label>Deck 1</label>

@@ -181,13 +181,13 @@ const SeriesPanel = React.createClass({
                     />
                 </div>
                 <hr />
-                <p>Player 1 Deck Status</p>
+                <p>Player 1 ({this.state.player1.tag}) Deck Status</p>
                 <DeckStatus
                     player={this.state.player1}
                     status={this.state.player1Status}
                 />
                 <hr />
-                <p>Player 2 Deck Status</p>
+                <p>Player 2 ({this.state.player2.tag}) Deck Status</p>
                 <DeckStatus
                     player={this.state.player2}
                     status={this.state.player2Status}

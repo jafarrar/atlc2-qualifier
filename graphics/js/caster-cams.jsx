@@ -133,65 +133,30 @@ const CasterCams = React.createClass({
 const StandingsBox = React.createClass({
     getInitialState() {
         return {
-            player1: {},
-            player2: {},
-            player3: {},
-            player4: {},
-            player5: {},
-            player6: {},
-            player7: {},
-            player8: {}
+            group: []
         }
     },
 
     componentWillReceiveProps: function(nextProps) {
         this.setState({
-            player1: nextProps.player1,
-            player2: nextProps.player2,
-            player3: nextProps.player3,
-            player4: nextProps.player4,
-            player5: nextProps.player5,
-            player6: nextProps.player6,
-            player7: nextProps.player7,
-            player8: nextProps.player8,           
+            group: nextProps.group        
         });
     },
 
+    isThrough: function(wins) {
+        return wins > 3;
+    },
+
     render: function() {
+        let playerDivs = [];
+
+        for (var i = 0; i < this.props.group.length; i++) {
+            playerDivs.push(<div className="standingsPlayer"><div className="tag">{this.state.group[i].tag}</div><div className="score">{this.state.group[i].wins} - {this.state.group[i].losses}</div></div>);
+        }
+        
         return (
             <div className="standingsBox">
-                <div className="standingsPlayer">
-                    <div className="tag">{this.state.player1.tag}</div>
-                    <div className="score">{this.state.player1.wins} - {this.state.player1.losses}</div>
-                </div>
-                <div className="standingsPlayer">
-                    <div className="tag">{this.state.player2.tag}</div>
-                    <div className="score">{this.state.player2.wins} - {this.state.player2.losses}</div>
-                </div>
-                <div className="standingsPlayer">
-                    <div className="tag">{this.state.player3.tag}</div>
-                    <div className="score">{this.state.player3.wins} - {this.state.player3.losses}</div>
-                </div>
-                <div className="standingsPlayer">
-                    <div className="tag">{this.state.player4.tag}</div>
-                    <div className="score">{this.state.player4.wins} - {this.state.player4.losses}</div>
-                </div>
-                <div className="standingsPlayer">
-                    <div className="tag">{this.state.player5.tag}</div>
-                    <div className="score">{this.state.player5.wins} - {this.state.player5.losses}</div>
-                </div>
-                <div className="standingsPlayer">
-                    <div className="tag">{this.state.player6.tag}</div>
-                    <div className="score">{this.state.player6.wins} - {this.state.player6.losses}</div>
-                </div>
-                <div className="standingsPlayer">
-                    <div className="tag">{this.state.player7.tag}</div>
-                    <div className="score">{this.state.player7.wins} - {this.state.player7.losses}</div>
-                </div>
-                <div className="standingsPlayer">
-                    <div className="tag">{this.state.player8.tag}</div>
-                    <div className="score">{this.state.player8.wins} - {this.state.player8.losses}</div>
-                </div>
+                {playerDivs}
             </div>
         );
     }
@@ -201,7 +166,11 @@ const StandingsBox = React.createClass({
 const AllStandingsBoxes = React.createClass({
     getInitialState() {
         return {
-            players: {}
+            players: [],
+            group1: [],
+            group2: [],
+            group3: [],
+            group4: []
         }
     },
 
@@ -209,6 +178,48 @@ const AllStandingsBoxes = React.createClass({
         this.setState({
             players: nextProps.players
         });
+
+        this.setGroups();
+    },
+
+    sortPlayers: function(group, index, array) {
+        group.sort(function(a,b) {
+           if (a.wins < b.wins) {
+               return 1;
+           }
+           if (a.wins > b.wins) {
+               return -1;
+           }
+           return 0;
+        });
+    },
+
+    // credit http://stackoverflow.com/a/11764168
+    // distributes players from array into groups of $len 
+    chunk: function(arr, len) {
+        let chunks = [],
+            i = 0,
+            n = arr.length;
+
+        while (i < n) {
+            chunks.push(arr.slice(i, i += len));
+        }
+
+        return chunks;
+    },
+
+    // split players into 4 groups, then sort them by wins within the group
+    // size of groups is hardcoded to 8
+    setGroups: function() {
+        let groups = this.chunk(this.state.players, 8);
+        groups.forEach(this.sortPlayers);
+
+        this.setState({
+            group1: groups[0],
+            group2: groups[1],
+            group3: groups[2],
+            group4: groups[3]
+        })
     },
 
     render: function() {
@@ -216,46 +227,18 @@ const AllStandingsBoxes = React.createClass({
             <div className="standingsBoxContainer">
                 <div className="left">
                     <StandingsBox 
-                        player1={this.state.players[0]}
-                        player2={this.state.players[1]}
-                        player3={this.state.players[2]}
-                        player4={this.state.players[3]}
-                        player5={this.state.players[4]}
-                        player6={this.state.players[5]}
-                        player7={this.state.players[6]}
-                        player8={this.state.players[7]}
+                        group={this.state.group1}
                     />
                     <StandingsBox 
-                        player1={this.state.players[8]}
-                        player2={this.state.players[9]}
-                        player3={this.state.players[10]}
-                        player4={this.state.players[11]}
-                        player5={this.state.players[12]}
-                        player6={this.state.players[13]}
-                        player7={this.state.players[14]}
-                        player8={this.state.players[15]}
+                        group={this.state.group2}
                     />
                 </div>
                 <div className="right">
                     <StandingsBox 
-                        player1={this.state.players[16]}
-                        player2={this.state.players[17]}
-                        player3={this.state.players[18]}
-                        player4={this.state.players[19]}
-                        player5={this.state.players[20]}
-                        player6={this.state.players[21]}
-                        player7={this.state.players[22]}
-                        player8={this.state.players[23]}
+                        group={this.state.group3}
                     />
                     <StandingsBox 
-                        player1={this.state.players[24]}
-                        player2={this.state.players[25]}
-                        player3={this.state.players[26]}
-                        player4={this.state.players[27]}
-                        player5={this.state.players[28]}
-                        player6={this.state.players[29]}
-                        player7={this.state.players[30]}
-                        player8={this.state.players[31]}
+                        group={this.state.group4}
                     />
                 </div>
             </div>
@@ -319,6 +302,7 @@ const PlayerBox = React.createClass({
     render: function() {
         return (
             <div className="playerBox">
+                <div className="playerPicture">{this.state.player.picture || ''}</div>
                 <img className="playerPicture" src={"/assets/atlc2-qualifier/player-pictures/" + this.state.player.picture + ".jpg"}/>
                 <div className="playerTag">{this.state.player.tag || ''}</div>
             </div>

@@ -1,17 +1,73 @@
-#up-next {
+.lowerThird {
     background: url('../img/upNextBottom.png');
     width: 1920px;
     height: 1080px;
-}
-
-.message {
     position: absolute;
-    bottom: 30px;
-    left: 35px;
-    font-size: 24px;
+    top: 0;
+    left: 0;
     letter-spacing: 2px;
 }
 
-.message strong {
+.top {
+    position: absolute;
+    bottom: 48px;
+    left: 35px;
+    font-size: 24px;
     font-family: 'nexa_boldregular', arial;
+}
+
+.bottom {
+    position: absolute;
+    bottom: 18px;
+    left: 35px;
+    font-size: 18px;
+}
+
+.standingsBox {
+    position: absolute;
+    width: 325px;
+    height: 430px;
+    border: 2px solid transparent;
+    top: 475px;
+}
+
+.left .standingsBox:first-child {
+    left: 228px;
+}
+
+.left .standingsBox:last-child {
+    left: 607px;
+}
+
+.right .standingsBox:first-child {
+    right: 607px;
+}
+
+.right .standingsBox:last-child {
+    right: 228px;
+}
+
+.standingsPlayer {
+    height: 52px;
+    width: 100%;
+    border: 1px solid transparent;
+    font-size: 24px;
+    position: relative;
+}
+
+.standingsPlayer .score {
+    text-align: right;
+}
+
+.standingsPlayer .tag {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    letter-spacing: 2px;
+}
+
+.standingsPlayer .score {
+    position: absolute;
+    right: 15px;
+    top: 12px;
 }
