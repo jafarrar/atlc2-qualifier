@@ -35,9 +35,11 @@ const BroadcastPanel = React.createClass({
     render: function() {
         return (
             <form className='brodcastForm' onSubmit={this.updateBroadcast}>
+                <p>Caster 1 (left)</p>
                 <CasterForm 
                     caster={this.state.caster1}
                 />
+                <p>Caster 2 (right)</p>
                 <CasterForm 
                     caster={this.state.caster2}
                 />
@@ -97,6 +99,7 @@ const LowerThirdForm = React.createClass({
     render: function() {
         return (
             <div className='lowerthird'>
+                <p>Lower Third</p>
                 <div className='input-group'>
                     <label>Top</label>
                     <input
@@ -139,7 +142,8 @@ const TimerForm = React.createClass({
     
     render: function() {
         return (
-            <div className='lowerthird'>
+            <div className='timer'>
+                <p>Timer (inactive)</p>
                 <label>Timer Length (minutes)</label>
 				<input
 					type="number"
@@ -184,6 +188,7 @@ const FlyoutForm = React.createClass({
     render: function() {
         return (
             <div className="flyoutForm">
+                <p>Flyouts</p>
                 <div className='input-group'>
                     <label>Message</label>
                     <input

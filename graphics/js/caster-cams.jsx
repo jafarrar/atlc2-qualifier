@@ -21,7 +21,8 @@ const CasterCams = React.createClass({
                 player2Classes: {
                     'picks': {},
                     'bans': {}
-                }
+                },
+                score: ''
             },
             playerPictureList: {}
         }
@@ -95,6 +96,18 @@ const CasterCams = React.createClass({
 	},
 
     render: function() {
+        const scoreState = this.state.series.score;
+        let score1 = '0';
+        let score2 = '0';
+
+        const parseScore = function() {            
+            score1 = scoreState.charAt(0);
+            score2 = scoreState.charAt(scoreState.length-1);
+            console.log(score1, score2);
+        }
+
+        parseScore();
+
         return (
             <div className="casterCams">
                 <div className="casterLabelContainer">
@@ -109,10 +122,13 @@ const CasterCams = React.createClass({
                     <PlayerBox 
                         player={this.state.series.player1}
                     />
+                    
                     <PlayerBox 
                         player={this.state.series.player2}
                     />
                 </div>
+                <div className="seriesScore leftScore">{score1}</div>
+                <div className="seriesScore rightScore">{score2}</div>
                 <div className="deckBoxContainer">
                     <DeckBox
                         classes={this.state.series.player1Classes}
@@ -147,13 +163,27 @@ const StandingsBox = React.createClass({
         return wins > 3;
     },
 
+    isEliminated: function(wins, losses) {
+        return losses > 4 && wins < 1;
+    },
+
     render: function() {
         let playerDivs = [];
 
         for (var i = 0; i < this.props.group.length; i++) {
-            playerDivs.push(<div className="standingsPlayer"><div className="tag">{this.state.group[i].tag}</div><div className="score">{this.state.group[i].wins} - {this.state.group[i].losses}</div></div>);
+            let isThrough = false;
+            let isEliminated = false;
+
+            if(this.state.group[i].wins > 3) {
+                isThrough = true;
+            }
+
+            if(this.state.group[i].losses > 3) {
+                isEliminated = true;
+            }
+
+            playerDivs.push(<div className={isThrough ? 'standingsPlayer through' : 'standingsPlayer'}><div className={isEliminated ? 'tag eliminated' : 'tag'}>{this.state.group[i].tag}</div><div className={isEliminated ? 'score eliminated' : 'score'}>{this.state.group[i].wins} - {this.state.group[i].losses}</div></div>);
         }
-        
         return (
             <div className="standingsBox">
                 {playerDivs}
@@ -179,18 +209,21 @@ const AllStandingsBoxes = React.createClass({
             players: nextProps.players
         });
 
+        this.sortPlayers(this.state.players);
         this.setGroups();
+
+        console.log(nextProps.players);
     },
 
     sortPlayers: function(group, index, array) {
         group.sort(function(a,b) {
-           if (a.wins < b.wins) {
-               return 1;
-           }
-           if (a.wins > b.wins) {
-               return -1;
-           }
-           return 0;
+            let n = b.wins - a.wins;
+
+            if (n !== 0) {
+                return n;
+            }
+
+            return a.losses - b.losses; 
         });
     },
 
@@ -209,10 +242,10 @@ const AllStandingsBoxes = React.createClass({
     },
 
     // split players into 4 groups, then sort them by wins within the group
-    // size of groups is hardcoded to 8
+    // size of groups is hardcoded to 6
     setGroups: function() {
-        let groups = this.chunk(this.state.players, 8);
-        groups.forEach(this.sortPlayers);
+        let groups = this.chunk(this.state.players, 4);
+        //groups.forEach(this.sortPlayers);
 
         this.setState({
             group1: groups[0],

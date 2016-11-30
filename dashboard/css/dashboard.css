@@ -8,6 +8,10 @@ body {
     margin: 5px 0;
 }
 
+.input-group input[type="checkbox"] {
+    width: auto;
+}
+
 .input-group label {
     display: inline-block;
     width: 20%;

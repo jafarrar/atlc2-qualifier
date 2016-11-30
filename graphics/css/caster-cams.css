@@ -1,9 +1,29 @@
+.seriesScore {
+    position: absolute;
+    top: 520px;
+    font-size: 48px;
+    font-family: 'nexa_boldregular', arial;
+    color: #f9b955;
+}
+
+.eliminated {
+    color: red;
+}
+
+.leftScore {
+    left: 900px;
+}
+
+.rightScore {
+    right: 900px;
+}
+
 .standingsBox {
     position: absolute;
     width: 325px;
     height: 430px;
     border: 2px solid transparent;
-    top: 475px;
+    top: 510px;
 }
 
 .left .standingsBox:first-child {
@@ -29,6 +49,10 @@
     font-size: 24px;
     position: relative;
 }
+
+.standingsPlayer.through {
+    color: #f9b955;
+} 
 
 .standingsPlayer .score {
     text-align: right;
@@ -91,7 +115,7 @@
 .playerBox:last-child .playerPicture {
     z-index: -9;
     position: absolute;
-    left: -175px;
+    left: -140px;
     width: 150px;
     bottom: -40px;
 }
@@ -99,7 +123,7 @@
 .playerBox:first-child .playerPicture {
     z-index: -9;
     position: absolute;
-    right: -175px;
+    right: -140px;
     width: 150px;
     bottom: -40px;
 }

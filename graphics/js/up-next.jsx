@@ -107,12 +107,26 @@ const StandingsBox = React.createClass({
         return wins > 3;
     },
 
+    isEliminated: function(wins) {
+        return losses > 4;
+    },
+
     render: function() {
-        console.log(this.state);
         let playerDivs = [];
 
         for (var i = 0; i < this.props.group.length; i++) {
-            playerDivs.push(<div className="standingsPlayer"><div className="tag">{this.state.group[i].tag}</div><div className="score">{this.state.group[i].wins} - {this.state.group[i].losses}</div></div>);
+            let isThrough = false;
+            let isEliminated = false;
+
+            if(this.state.group[i].wins > 3) {
+                isThrough = true;
+            }
+
+            if(this.state.group[i].losses > 3) {
+                isEliminated = true;
+            }
+
+            playerDivs.push(<div className={isThrough ? 'standingsPlayer through' : 'standingsPlayer'}><div className={isEliminated ? 'tag eliminated' : 'tag'}>{this.state.group[i].tag}</div><div className={isEliminated ? 'score eliminated' : 'score'}>{this.state.group[i].wins} - {this.state.group[i].losses}</div></div>);
         }
         return (
             <div className="standingsBox">
@@ -139,18 +153,21 @@ const AllStandingsBoxes = React.createClass({
             players: nextProps.players
         });
 
+        this.sortPlayers(this.state.players);
         this.setGroups();
+
+        console.log(nextProps.players);
     },
 
     sortPlayers: function(group, index, array) {
         group.sort(function(a,b) {
-           if (a.wins < b.wins) {
-               return 1;
-           }
-           if (a.wins > b.wins) {
-               return -1;
-           }
-           return 0;
+            let n = b.wins - a.wins;
+
+            if (n !== 0) {
+                return n;
+            }
+
+            return a.losses - b.losses; 
         });
     },
 
@@ -169,9 +186,10 @@ const AllStandingsBoxes = React.createClass({
     },
 
     // split players into 4 groups, then sort them by wins within the group
+    // size of groups is hardcoded to 6
     setGroups: function() {
-        let groups = this.chunk(this.state.players, 8);
-        groups.forEach(this.sortPlayers);
+        let groups = this.chunk(this.state.players, 4);
+        //groups.forEach(this.sortPlayers);
 
         this.setState({
             group1: groups[0],

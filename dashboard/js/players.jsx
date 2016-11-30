@@ -26,6 +26,8 @@ const PlayersPanel = React.createClass({
 		playersRep.on('change', function() {
 			console.log('players replicant change detected by players editor');
 			this.loadPlayersFromServer();
+			this.forceUpdate();
+			console.table(this.state.players);
 		}.bind(this));
     },
 
@@ -45,6 +47,7 @@ const PlayersPanel = React.createClass({
 const PlayerList = React.createClass({
 	getInitialState() {
 		return {
+			players: [],
 			playerPictureList: [],
 			activePlayer: {
 				tag: 'Placeholder',
@@ -69,6 +72,12 @@ const PlayerList = React.createClass({
 		}.bind(this));
 	},
 
+	componentWillReceiveProps: function(nextProps) {
+		this.setState({
+			players: nextProps.players
+		});
+	},
+
 	componentDidMount: function() {
 		this.loadPlayerPicturesFromServer();
 
@@ -78,7 +87,7 @@ const PlayerList = React.createClass({
 	},
 
 	handleActiveChange: function(e) {
-		const playerObj = this.props.players.filter(function(playerObj) {
+		const playerObj = this.state.players.filter(function(playerObj) {
 			return playerObj.id == e.target.value;
 		});
 
@@ -86,6 +95,7 @@ const PlayerList = React.createClass({
 			activePlayer: playerObj[0],
 			activePlayerId: playerObj[0].id
 		});
+
 	},
 
 	render: function() {
@@ -163,6 +173,7 @@ const AddPlayerForm = React.createClass({
 	render: function() {
 		return (
 			<form className="addPlayer" onSubmit={this.handleSubmit}>
+				<p>Add Player</p>
 				<label>New Player's Tag</label>
 				<input
 					type="text"
@@ -224,6 +235,7 @@ const PlayerEditor = React.createClass({
 		const index = playersRep.value.findIndex(this.findPlayer);
 
 		playersRep.value[index] = updatedPlayer;
+		this.setState(updatedPlayer);
 	},
 
 	removePlayer: function(e) {
@@ -308,7 +320,8 @@ const PlayerEditor = React.createClass({
 						onChange={this.handleChange.bind(this, 'losses')}
 					/>
 				</div>
-				<p><strong>Classes</strong></p>
+
+				<p><strong>{this.state.tag}'s Classes</strong></p>
 				<div className="deckPicker">
 					<div className="input-group">
 						<label>Deck 1</label>
@@ -338,7 +351,7 @@ const PlayerEditor = React.createClass({
 				/>
 				<input
 					type='submit'
-					value='Delete'
+					value='Delete Player'
 					onClick={this.removePlayer}
 				/>
 

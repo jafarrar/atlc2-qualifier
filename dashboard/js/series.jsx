@@ -47,7 +47,10 @@ const SeriesPanel = React.createClass({
             player2Id: -1,
             player2Classes: {},
             score: '0-0',
-            player2Status: []
+            player2Status: [],
+            inGameLabel1: '',
+            inGameLabel2: '',
+            inGameLabel3: ''
         }
     },
 
@@ -178,6 +181,32 @@ const SeriesPanel = React.createClass({
                         id='score'
                         value={this.state.score}
                         onChange={this.handleChange.bind(this, 'score')}
+                    />
+                </div>
+                <hr />
+                <p>In Game Status Text (top right)</p>
+                <div className="input-group">
+                    <label>Status 1</label>
+                    <input
+                        type='text'
+                        value={this.state.inGameLabel1}
+                        onChange={this.handleChange.bind(this, 'inGameLabel1')}
+                    />
+                </div>
+                <div className="input-group">
+                    <label>Status 2</label>
+                    <input
+                        type='text'
+                        value={this.state.inGameLabel2}
+                        onChange={this.handleChange.bind(this, 'inGameLabel2')}
+                    />
+                </div>
+                <div className="input-group">
+                    <label>Status 3</label>
+                    <input
+                        type='text'
+                        value={this.state.inGameLabel3}
+                        onChange={this.handleChange.bind(this, 'inGameLabel3')}
                     />
                 </div>
                 <hr />

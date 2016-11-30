@@ -13,7 +13,11 @@ const InGame = React.createClass({
                 player2Classes: {
                     'picks': {},
                     'bans': {}
-                }
+                },
+                score: '',
+                inGameLabel1: '',
+                inGameLabel2: '',
+                inGameLabel3: ''
             }
         }
     },
@@ -37,15 +41,35 @@ const InGame = React.createClass({
 	},
 
     render: function() {
+        const scoreState = this.state.series.score;
+        let score1 = '0';
+        let score2 = '0';
+        let seriesInfo = ['','',''];
+
+        const parseScore = function() {            
+            score1 = scoreState.charAt(0);
+            score2 = scoreState.charAt(scoreState.length-1);
+            console.log(score1, score2);
+        }
+
+        seriesInfo = [this.state.series.inGameLabel1, this.state.series.inGameLabel2, this.state.series.inGameLabel3];
+
+        console.log(seriesInfo);
+
+        parseScore();
+
         return (
             <div className="inGame">
                 <LeftPanel
                     player={this.state.series.player1}
                     classes={this.state.series.player1Classes}
+                    score={score1}
                 />
                 <RightPanel
                     player={this.state.series.player2}
                     classes={this.state.series.player2Classes}
+                    score={score2}
+                    seriesInfo={seriesInfo}
                 />
                 <InGameFlyout />
             </div>
@@ -57,14 +81,16 @@ const LeftPanel = React.createClass({
     getInitialState() {
         return {
             tag: '',
-            classes: {}
+            classes: {},
+            score: ''
         }
     },
 
     componentWillReceiveProps: function(nextProps) {
         this.setState({
             tag: nextProps.player.tag || props.player.tag,
-            classes: nextProps.classes || props.classes
+            classes: nextProps.classes || props.classes,
+            score: nextProps.score || '0'
         });
     },
 
@@ -72,8 +98,8 @@ const LeftPanel = React.createClass({
         return (
             <div className="leftPanel">
                 <div className="tag">{this.state.tag}</div>
+                <div className="score">{this.state.score}</div>
                 <div className="webcam"></div>
-                <div className="series-info"></div>
                 <DeckBox
                     classes={this.state.classes}
                 />
@@ -86,21 +112,32 @@ const RightPanel = React.createClass({
     getInitialState() {
         return {
             tag: '',
-            classes: {}
+            classes: {},
+            score: '',
+            seriesInfo: ['','','']
         }
     },
 
     componentWillReceiveProps: function(nextProps) {
         this.setState({
             tag: nextProps.player.tag || props.player.tag,
-            classes: nextProps.classes || props.classes
+            classes: nextProps.classes || props.classes,
+            score: nextProps.score || '0',
+            seriesInfo: nextProps.seriesInfo || props.seriesInfo
         });
     },
 
     render: function(){
+        console.log(this.state);
         return (
             <div className="rightPanel">
                 <div className="tag">{this.state.tag}</div>
+                <div className="score">{this.state.score}</div>
+                <div className="seriesInfo">
+                    <div id="seriesInfo1">{this.state.seriesInfo[0]}</div>
+                    <div id="seriesInfo2">{this.state.seriesInfo[1]}</div>
+                    <div id="seriesInfo3">{this.state.seriesInfo[2]}</div>
+                </div>
                 <div className="webcam"></div>
                 <DeckBox
                     classes={this.state.classes}
