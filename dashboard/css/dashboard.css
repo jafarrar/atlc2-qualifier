@@ -26,3 +26,8 @@ body {
 p {
     font-weight: 700;
 }
+
+.series h3 {
+    text-align: center;
+    margin-bottom: 0;
+}

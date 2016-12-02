@@ -43,6 +43,13 @@
         "width": 4,
         "file": "broadcast.html",
         "headerColor": "#9f9bbd"
+      },
+      {
+        "name": "bracket",
+        "title": "Bracket Editor",
+        "width": 4,
+        "file": "bracket.html",
+        "headerColor": "#9f9bbd"
       }
     ],
     "graphics": [

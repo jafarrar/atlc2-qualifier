@@ -27,7 +27,6 @@ const PlayersPanel = React.createClass({
 			console.log('players replicant change detected by players editor');
 			this.loadPlayersFromServer();
 			this.forceUpdate();
-			console.table(this.state.players);
 		}.bind(this));
     },
 
