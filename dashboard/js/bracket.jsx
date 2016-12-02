@@ -192,6 +192,7 @@ const PlayerList = React.createClass({
 					value={this.props.playerId} 
 					onChange={this.props.onChange}>
 						<option key='-1'>Select a player</option>
+						<option key='tbd'>TBD</option>
 						{this.props.players.map(MakeItem)}
 						<option key='bye'>Bye</option>
 				</select>

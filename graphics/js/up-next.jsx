@@ -1,5 +1,6 @@
 const broadcastRep = nodecg.Replicant('broadcast');
 const playersRep = nodecg.Replicant('players');
+const bracketRep = nodecg.Replicant('bracket');
 
 const UpNext = React.createClass({ 
     getInitialState() {
@@ -9,7 +10,8 @@ const UpNext = React.createClass({
                 caster2: {},
                 lowerthird: {}
             },
-            players: []
+            players: [],
+            bracket: []
         }
     },
 
@@ -33,10 +35,20 @@ const UpNext = React.createClass({
         }.bind(this));
     },
 
+    loadBracketFromServer: function() {
+		nodecg.readReplicant('bracket', function(value) {
+            if(!value) {
+                return {};
+            }
+
+            this.setState({bracket: value});
+        }.bind(this));
+    },
 
 	componentDidMount: function() {
 		this.loadBroadcastFromServer();
         this.loadPlayersFromServer();
+		this.loadBracketFromServer();
 
 		broadcastRep.on('change', function() {
 			this.loadBroadcastFromServer();
@@ -47,13 +59,22 @@ const UpNext = React.createClass({
 			this.loadPlayersFromServer();
             this.forceUpdate();
 		}.bind(this)); 
+
+		bracketRep.on('change', function() {
+			this.loadBracketFromServer();
+		}.bind(this));
 	},
 
     render: function() {
         return (
             <div className="upNext">
+            {/* Standings boxes disabled for top 8
                 <AllStandingsBoxes
                     players={this.state.players}
+                />
+            */}
+                <BracketBox 
+                    bracket={this.state.bracket}    
                 />
                 <LowerThird
                     text={this.state.broadcast.lowerthird}
@@ -89,7 +110,48 @@ const LowerThird = React.createClass({
 
 });
 
-// build the player standings
+// build the brackets for top 8 
+const BracketBox = React.createClass({
+    render: function() {
+        return (
+            <div className="bracketsContainer">
+				{this.props.bracket.map(function(object, i) {
+					return <BracketSeries series={object} key={i} />;
+				}.bind(this))}
+            </div>
+        );
+    }
+});
+
+const BracketSeries = React.createClass({
+    render: function() {
+        let isThrough1 = false;
+        let isThrough2 = false;
+
+        if(this.props.series.player1.score > 2) {
+            isThrough1 = true;
+        }
+
+        if(this.props.series.player2.score > 2) {
+            isThrough2 = true;
+        }
+
+        return (
+            <div className="seriesContainer" id={this.props.series.name.trim()}>
+                <div className={isThrough1 ? 'player1 through' : 'player1'}>
+                    <div className="tag">{this.props.series.player1.tag}</div>
+                    <div className="score">{this.props.series.player1.score}</div>
+                </div>
+                <div className={isThrough2 ? 'player2 through' : 'player2'}>
+                    <div className="tag">{this.props.series.player2.tag}</div>
+                    <div className="score">{this.props.series.player2.score}</div>
+                </div>
+            </div>
+        );
+    }
+})
+
+// build the player standings for group play
 const StandingsBox = React.createClass({
     getInitialState() {
         return {

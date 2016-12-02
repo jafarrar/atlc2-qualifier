@@ -71,6 +71,106 @@
     top: 12px;
 }
 
+.bracketsContainer {
+    width: 1920px;
+    height: 1080px;
+    position: absolute;
+    top: 0;
+    left: 0;  
+}
+
+.seriesContainer {
+    position: absolute;
+    width: 330px;
+    height: 107px;
+    letter-spacing: 2px;
+    font-size: 26px;
+}
+
+.seriesContainer > .through {
+    color: #f9b955;
+} 
+
+.tag, .score {
+    position: absolute;
+}
+
+.tag {
+    width: 235px;
+    height: 30px;
+    left: 16px;
+}
+
+.score {
+    height: 30px;
+    right: 35px;
+    font-family: 'nexa_boldregular', arial;
+}
+
+.player1 .tag {
+    top: 12px;
+}
+
+.player1 .score {
+    top: 12px;
+}
+
+.player2 .tag {
+    bottom: 12px;
+}
+
+.player2 .score {
+    bottom: 12px;
+}
+
+div[id='Quarter Finals 3'] .tag,
+div[id='Quarter Finals 4'] .tag,
+div[id='Semi Finals 2'] .tag {
+    left: 75px;
+    text-align: right;
+}
+
+div[id='Quarter Finals 3'] .score,
+div[id='Quarter Finals 4'] .score,
+div[id='Semi Finals 2'] .score {
+    left: 35px;
+}
+
+div[id='Quarter Finals 1'] {
+    top: 608px;
+    left: 185px;
+}
+
+div[id='Quarter Finals 2'] {
+    top: 758px;
+    left: 185px;
+}
+
+div[id='Quarter Finals 3'] {
+    top: 608px;
+    right: 170px;
+}
+
+div[id='Quarter Finals 4'] {
+    top: 758px;
+    right: 170px;
+}
+
+div[id='Semi Finals 1'] {
+    top: 683px;
+    left: 572px;
+}
+
+div[id='Semi Finals 2'] {
+    top: 683px;
+    right: 557px;
+}
+
+div[id='Grand Final'] {
+    top: 510px;
+    right: 783px;
+}
+
 .casterLabel {
     position: absolute;
     top: 350px;
