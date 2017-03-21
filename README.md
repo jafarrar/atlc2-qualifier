@@ -10,7 +10,7 @@ This bundle was not designed for distribution or re-use. I shoe-horned React int
 2. Install NodeCG as shown in the instructions on the [NodeCG website.](http://nodecg.com/) If it tells you `bower` is not recognized, type in `npm install -g bower`.
 3. From this point on, all commands should be in the regular command line, not Node.js. Exit Node.js by hitting ctrl-C twice if you're in Node.js.
 4. Install nodecg-cli as shown [here.](https://github.com/nodecg/nodecg-cli)
-5. In the command line in the folder you installed NodeCG, enter `nodecg install kegwen/atlc2-qualifier`
+5. In the command line in the folder you installed NodeCG, enter `nodecg install jafarrar/atlc2-qualifier`
 6. Start NodeCG by entering `nodecg start` into command prompt in the folder where NodeCG is installed and go to `localhost:9090` in your browser.
 7. Install [OBS Studio](https://obsproject.com/)
 8. Add the views listed on the Graphics page at `localhost:9090/dashboard/#!/graphics` as Browser Sources in similarly-named OBS scenes
